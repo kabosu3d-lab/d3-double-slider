@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Slider</title>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="doubleD3Slider.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+    <div id="vis"></div>
+</body>
+
+<script>
+    var svg = d3.select("#vis").append("svg")
+        .attr("width", 300).attr("height", 500)
+    // テキスト
+    var text = svg.append("text")
+        .attr("x", 50)
+        .attr("y", 100)
+        .text("0.00-1.00");
+
+    // スライダ
+    var slider = new doubleSlider();
+
+    slider.
+        width(200)
+        .x(30)
+        .y(200)
+        .value(0.0, 1.0)
+        .event(function () {
+            var v = slider.value();
+            text.text(v.l.toFixed(2) + "-" + v.r.toFixed(2));
+        });
+
+    svg.call(slider);
+</script>
+
+</html>
